@@ -1,0 +1,34 @@
+{
+  "name": "vault",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node Backend/server.js ",
+    "server": "node --watch --env-file=.env Backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Priyanshu4832/MyVault.git"
+  },
+  "keywords": [],
+  "author": "PRIYANSHU",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Priyanshu4832/MyVault/issues"
+  },
+  "homepage": "https://github.com/Priyanshu4832/MyVault#readme",
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "bcryptjs": "^3.0.3",
+    "express": "^5.2.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.21.0"
+  },
+  "devDependencies": {
+    "prisma": "^7.8.0"
+  }
+}
