@@ -75,13 +75,18 @@ export const getNotes = asyncHandler(async (req,res)=>{
 export const getNote = asyncHandler(async (req ,res)=>{
 
     const noteId =  Number(req.params.id);
+    if (isNaN(noteId)) {
+        res.status(400);
+        throw new Error("Invalid note ID");
+    }
 
     const note = await prisma.note.findFirst({
         where :{
             id : noteId,
             userId : req.user.id,
             
-        }
+        },
+        include : {files : true}
     })
 
     if(!note){
@@ -153,6 +158,10 @@ export const updateNote = asyncHandler( async (req , res)=>{
     const {content} = req.body;
      
     const noteId = Number(req.params.id);
+    if (isNaN(noteId)) {
+        res.status(400);
+        throw new Error("Invalid note ID");
+    }
 
 
     const note = await prisma.note.findFirst({
@@ -175,6 +184,7 @@ export const updateNote = asyncHandler( async (req , res)=>{
             uploadedFiles.push(result);
         }
     }
+  
 
     // update the note content and add new files to the note
     const updatedNote = await prisma.note.update({
@@ -182,7 +192,8 @@ export const updateNote = asyncHandler( async (req , res)=>{
             id : noteId
         },
         data : {
-            content : content,
+            ...(content && { content }),
+            
             ...(uploadedFiles.length>0 && {
                 files : {
                     create : uploadedFiles
@@ -208,6 +219,10 @@ export const updateNote = asyncHandler( async (req , res)=>{
 export const deleteNote = asyncHandler( async (req, res)=>{
 
     const noteId = Number(req.params.id);
+    if (isNaN(noteId)) {
+        res.status(400);
+        throw new Error("Invalid note ID");
+    }
     
     const note = await prisma.note.findFirst({
         where : {
@@ -254,6 +269,14 @@ export const deleteFile = asyncHandler( async (req, res)=>{
 
     const noteId = Number(req.params.noteId);
     const fileId = Number(req.params.fileId);
+    if (isNaN(noteId)) {
+        res.status(400);
+        throw new Error("Invalid note ID");
+    }
+    if (isNaN(fileId)) {
+        res.status(400);
+        throw new Error("Invalid file ID");
+    }
 
 
     const note = await prisma.note.findFirst({
@@ -305,6 +328,10 @@ export const deleteFile = asyncHandler( async (req, res)=>{
 export const generateToken = asyncHandler (async (req , res)=>{
 
     const noteId = Number(req.params.id);
+    if (isNaN(noteId)) {
+        res.status(400);
+        throw new Error("Invalid note ID");
+    }
 
     // check for note
     const note = await prisma.note.findFirst({
@@ -337,7 +364,8 @@ export const generateToken = asyncHandler (async (req , res)=>{
 
     res.status(200).json({
         "message":"token generated successfully!",
-        "token" : token
+        "token" : token,
+        shareUrl: `${process.env.FRONTEND_URL}/shared/${token}`
     })
 })
 
@@ -365,7 +393,6 @@ export const shareNote = asyncHandler (async(req , res)=>{
     res.status(200).json({
         success: true,
         note: {
-            title: note.title,
             content: note.content,
             files: note.files,
             updatedAt: note.updatedAt
