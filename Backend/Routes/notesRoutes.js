@@ -7,27 +7,23 @@ import upload from '../Middlewares/uploadMiddleware.js';
 
 const router = express.Router();
 
-router.get('/' , protect ,getNotes);
-router.get('/:id', protect  , getNote);
+router.get('/', protect, getNotes);
+router.post('/', protect, upload.array('files', 10), createNote);
 
 
-router.post('/',protect , upload.array('files' , 10), createNote);
+router.post('/preview', protect, getInstantPreview); 
+router.get('/shared/:token', shareNote);
 
 
-router.put('/:id' , protect , upload.array('files' , 10), updateNote);
+router.get('/:id', protect, getNote);
+router.put('/:id', protect, upload.array('files', 10), updateNote);
+router.delete('/:id', protect, deleteNote);
 
 
-
-router.delete('/:id' , protect , deleteNote);
-router.delete('/:noteId/files/:fileId' , protect , deleteFile);
-
-
-router.put('/:id/share' , protect , generateToken );
-router.get('/shared/:token' , shareNote);
-
-router.get('/preview' , protect , getInstantPreview)
-
+router.delete('/:noteId/files/:fileId', protect, deleteFile);
+router.put('/:id/share', protect, generateToken);
 
 export default router;
+
 
 

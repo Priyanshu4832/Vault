@@ -3,6 +3,7 @@ import prisma from '../../config/client.js';
 import { Readable } from 'stream';
 import crypto from 'crypto';
 import { getLinkPreview } from 'link-preview-js'; 
+import cloudinary from '../../config/cloudinary.js';
 
 
 
@@ -319,7 +320,7 @@ export const generateToken = asyncHandler (async (req , res)=>{
         throw new Error("Note not Found!");
     }
 
-    const token = note.shareToken;
+    let token = note.shareToken;
     if(!token){
         
         token = crypto.randomUUID(); //something like 'f81d4fae-7dec-11d0-a765-00a0c91e6bf6'
