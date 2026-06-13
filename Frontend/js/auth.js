@@ -56,7 +56,7 @@ async function handleLogin() {
 
         const data = await res.json();
         if(res.ok){
-            localStorage.setItem('token' , data.token);
+            localStorage.setItem('token' , data.user.token);
             window.location.href = 'dashboard.html';
         }
         else{
@@ -104,7 +104,7 @@ async function handleRegister() {
 
         const data = await res.json();
         if(res.ok){
-            localStorage.setItem('token' , data.token);
+            localStorage.setItem('token' , data.user.token);
             window.location.href = 'dashboard.html';
         }
         else{

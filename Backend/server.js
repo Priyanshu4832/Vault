@@ -4,6 +4,7 @@ dotenv.config();
 import authRoutes from './Routes/authRoutes.js'
 import {errorHandler} from './Middlewares/errorMiddleware.js'
 import notesRoutes from './Routes/notesRoutes.js'
+import cors from 'cors';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -15,6 +16,17 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 7000;
+
+// app.use(cors({
+   
+//     origin: [
+//         'http://localhost:5000', 
+//         'https://vault-mj02.onrender.com' 
+//     ],
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//     allowedHeaders: ['Content-Type', 'Authorization'] 
+// }));
+
 
 app.use(express.static(path.join(__dirname, '../Frontend')));
 app.use(express.json());
