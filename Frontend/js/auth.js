@@ -1,129 +1,131 @@
-
 const API = '/api';
 
-// get the element where i want to toggle that is make hidden or not
+console.log('auth.js loaded');
+console.log('API:', API);
+
 const loginForm = document.getElementById('login-wrapper');
 const registerForm = document.getElementById('register-wrapper');
-
-
-// get the links which upon clicking will toggle
-
 const loginLink = document.getElementById('to-login');
 const registerLink = document.getElementById('to-register');
 
+console.log('loginForm:', loginForm);
+console.log('registerForm:', registerForm);
 
-function toggleForm(){
+function toggleForm() {
     loginForm.classList.toggle('hidden');
     registerForm.classList.toggle('hidden');
 }
 
-// when you clcik login link make register form hidden and login visible
-loginLink.addEventListener('click' , toggleForm)
-//when you click register link make login hidden and register visisble
-registerLink.addEventListener('click' , toggleForm);
+loginLink.addEventListener('click', toggleForm);
+registerLink.addEventListener('click', toggleForm);
 
-if(localStorage.getItem('token')) {
+if (localStorage.getItem('token')) {
+    console.log('token found, redirecting to dashboard');
     window.location.href = 'dashboard.html';
 }
 
-// handle login
 async function handleLogin() {
+    console.log('handleLogin called');
     const errorElement = document.getElementById('login-error');
+    errorElement.classList.remove('show');
 
-    try{
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    console.log('email:', email, 'password length:', password.length);
 
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-
-
-        errorElement.classList.remove('show');
-
-
-        if(!email || !password){
-            errorElement.textContent = 'Please enter all feilds';
-            errorElement.classList.add('show');
-            return ;
-        }
-     
-
-        const res = await fetch(`${API}/auth/login`,
-            {
-                method : 'POST',
-                headers : { 'content-type' : 'application/json'},
-                body : JSON.stringify({email , password})
-            }
-        );
-
-        const data = await res.json();
-        console.log(data);
-        if(res.ok){
-            localStorage.setItem('token' , data.token);
-            window.location.href = 'dashboard.html';
-        }
-        else{
-            errorElement.textContent = data.message || 'Login Failed';
-            errorElement.classList.add('show');
-        }
-
+    if (!email || !password) {
+        errorElement.textContent = 'Please fill in all fields.';
+        errorElement.classList.add('show');
+        return;
     }
-    catch(err){
+
+    try {
+        console.log('sending fetch to:', `${API}/auth/login`);
+
+        const res = await fetch(`${API}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        console.log('response status:', res.status);
+        console.log('response ok:', res.ok);
+
+        const text = await res.text();
+        console.log('raw response text:', text);
+
+        const data = JSON.parse(text);
+        console.log('parsed data:', data);
+        console.log('token:', data.token);
+
+        if (res.ok) {
+            localStorage.setItem('token', data.token);
+            console.log('token stored:', localStorage.getItem('token'));
+            window.location.href = 'dashboard.html';
+        } else {
+            errorElement.textContent = data.message || 'Login failed.';
+            errorElement.classList.add('show');
+        }
+
+    } catch (err) {
+        console.log('catch block hit:', err);
+        console.log('error message:', err.message);
         errorElement.textContent = 'Something went wrong. Try again.';
         errorElement.classList.add('show');
     }
-   
 }
 
-
-// handle register
 async function handleRegister() {
+    console.log('handleRegister called');
     const errorElement = document.getElementById('register-error');
+    errorElement.classList.remove('show');
 
-    try{
+    const name = document.getElementById('register-name').value;
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
+    console.log('name:', name, 'email:', email, 'password length:', password.length);
 
-        const name = document.getElementById('register-name').value;
-        const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
-
-
-        errorElement.classList.remove('show');
-
-
-        if(!name || !email || !password){
-            errorElement.textContent = 'Please enter all feilds';
-            errorElement.classList.add('show');
-            return ;
-        }
-     
-
-        const res = await fetch(`${API}/auth/register`,
-            {
-                method : 'POST',
-                headers : { 'content-type' : 'application/json'},
-                body : JSON.stringify({name , email , password})
-            }
-        );
-
-        const data = await res.json();
-        if(res.ok){
-            localStorage.setItem('token' , data.token);
-            window.location.href = 'dashboard.html';
-        }
-        else{
-            errorElement.textContent = data.message || 'Register Failed';
-            errorElement.classList.add('show');
-        }
-
+    if (!name || !email || !password) {
+        errorElement.textContent = 'Please fill in all fields.';
+        errorElement.classList.add('show');
+        return;
     }
-    catch(err){
+
+    try {
+        console.log('sending fetch to:', `${API}/auth/register`);
+
+        const res = await fetch(`${API}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
+        });
+
+        console.log('response status:', res.status);
+        console.log('response ok:', res.ok);
+
+        const text = await res.text();
+        console.log('raw response text:', text);
+
+        const data = JSON.parse(text);
+        console.log('parsed data:', data);
+        console.log('token:', data.token);
+
+        if (res.ok) {
+            localStorage.setItem('token', data.token);
+            console.log('token stored:', localStorage.getItem('token'));
+            window.location.href = 'dashboard.html';
+        } else {
+            errorElement.textContent = data.message || 'Register failed.';
+            errorElement.classList.add('show');
+        }
+
+    } catch (err) {
+        console.log('catch block hit:', err);
+        console.log('error message:', err.message);
         errorElement.textContent = 'Something went wrong. Try again.';
         errorElement.classList.add('show');
     }
-   
 }
 
-
-const signinButton = document.getElementById('login-btn');
-const registerButton = document.getElementById('register-btn');
-
-if (signinButton) signinButton.addEventListener('click', handleLogin);
-if (registerButton) registerButton.addEventListener('click', handleRegister);
+document.getElementById('login-btn').addEventListener('click', handleLogin);
+document.getElementById('register-btn').addEventListener('click', handleRegister);
