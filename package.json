@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node Backend/server.js ",
+    "postinstall": "prisma generate",
     "server": "node --watch --env-file=.env Backend/server.js"
   },
   "repository": {

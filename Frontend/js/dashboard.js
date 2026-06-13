@@ -1,6 +1,7 @@
 const API = '/api';
 const token = localStorage.getItem('token');
 
+
 let allNotes = [];
 let currentFiles = [];
 let currentViewNoteId = null;

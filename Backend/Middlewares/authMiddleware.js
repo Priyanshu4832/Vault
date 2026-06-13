@@ -5,12 +5,14 @@ import prisma from '../../config/client.js';
 export const protect = asyncHandler(async(req, res , next)=>{
     // get header token (bearer token)
     const authHeader = req.headers.authorization;
+    console.log('Auth header received:', authHeader);
 
     // get the exact token from header and verify it
 
     let token;
     if(authHeader && authHeader.startsWith('Bearer')){
         token = authHeader.split(' ')[1];
+        
 
         try{
             //decode the token
