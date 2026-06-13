@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault — Shared Note</title>
+  
+    <link rel="stylesheet" href="css/share.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+    <!--------------------------------------- NAVBAR ---------------------------------------->
+    <nav class="shared-nav">
+
+        <!------------------ Brand name — links back to home ------------------>
+        <a class="shared-nav-brand" href="index.html">Vault</a>
+
+        <!------------------ Subtle label so guest knows this is read-only ------------------>
+        <span class="shared-nav-badge">Shared note</span>
+
+    </nav>
+    <!--------------------------------------- NAVBAR ENDS ------------------------------------->
+
+
+
+
+    <!--------------------------------------- MAIN CONTENT ------------------------------------>
+    <main class="shared-main">
+
+
+        <!------------------ Loading state — shown while JS fetches the note ------------------>
+        <div class="shared-loading" id="shared-loading">
+            <p>Loading note...</p>
+        </div>
+
+
+        <!------------------ Error state — shown if token is invalid or revoked ------------------>
+        <div class="shared-error hidden" id="shared-error">
+            <h2>Note not found.</h2>
+            <p>This link may have been revoked or never existed.</p>
+        </div>
+
+
+        <!------------------ Note content — populated by JS ------------------>
+        <div class="shared-note hidden" id="shared-note">
+
+
+            <!------------------ Note text ------------------>
+            <div class="shared-note-content" id="shared-note-content"></div>
+
+
+            <!------------------ Dashed separator — only shown if files exist ------------------>
+            <hr class="shared-separator hidden" id="shared-separator" />
+
+
+            <!------------------ Attached files — populated by JS ------------------>
+            <div class="shared-files" id="shared-files"></div>
+
+
+            <!------------------ Last updated timestamp ------------------>
+            <p class="shared-timestamp" id="shared-timestamp"></p>
+
+
+        </div>
+        <!------------------ Note content ENDS ------------------>
+
+
+    </main>
+    <!--------------------------------------- MAIN CONTENT ENDS -------------------------------->
+
+
+    <script src="js/share.js"></script>
+</body>
+</html>

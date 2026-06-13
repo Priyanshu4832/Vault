@@ -8,7 +8,7 @@ const router = express.Router();
 router.get('/', protect, getNotes);
 router.post('/', protect, upload.array('files', 10), createNote);
 
-router.post('/preview', protect, getInstantPreview);
+router.post('/preview',  getInstantPreview);
 router.get('/shared/:token', shareNote);
 
 router.put('/:id/share', protect, generateToken);

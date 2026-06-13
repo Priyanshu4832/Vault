@@ -1,0 +1,155 @@
+
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+    --bg: #F5F4FF;           /* very light purple page background */
+    --white: #FFFFFF;
+    --ink: #1A1728;          /* deep purple-black for text */
+    --ink-light: #6B6580;    /* muted purple-grey for subtitles */
+    --accent: #7C3AED;       /* vivid indigo/purple — main accent */
+    --accent-light: #EDE9FE; /* very light purple for hover states */
+    --panel: #2D1B69;        /* deep rich purple for left panel */
+    --border: #DDD6FE;       /* soft purple border for inputs */
+  
+}
+
+body {
+    font-family: 'DM Sans' , sans-serif;
+    background : var(--bg);
+    min-height: 100vh;
+}
+
+.hidden{
+    display: none;
+}
+
+
+
+
+/* ── NAVBAR ── */
+.shared-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 60px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+}
+
+.shared-nav-brand {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-decoration: none;      /* remove underline from anchor tag */
+}
+
+/* small pill label — "Shared note" */
+.shared-nav-badge {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    background: var(--accent-light);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* ── MAIN ── */
+.shared-main {
+    max-width: 680px;           /* comfortable reading width */
+    margin: 60px auto;
+    padding: 0 24px;
+}
+
+/* ── LOADING STATE ── */
+.shared-loading {
+    text-align: center;
+    padding: 80px 0;
+    color: var(--ink-light);
+    font-size: 0.95rem;
+}
+
+/* ── ERROR STATE ── */
+.shared-error {
+    text-align: center;
+    padding: 80px 0;
+}
+
+.shared-error h2 {
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+}
+
+.shared-error p {
+    color: var(--ink-light);
+    font-size: 0.95rem;
+}
+
+/* ── NOTE CARD ── */
+.shared-note {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ── NOTE TEXT ── */
+.shared-note-content {
+    font-size: 1rem;
+    color: var(--ink);
+    line-height: 1.75;
+    white-space: pre-wrap;      /* preserves line breaks from the textarea */
+    word-break: break-word;     /* long words wrap instead of overflowing */
+}
+
+/* ── DASHED SEPARATOR ── */
+.shared-separator {
+    border: none;
+    border-top: 1px dashed var(--border);
+}
+
+/* ── FILES LIST ── */
+.shared-files {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* each file is a clickable download link styled as a chip */
+.shared-file-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--accent-light);
+    color: var(--accent);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.shared-file-chip:hover { background: var(--border); }
+
+/* ── TIMESTAMP ── */
+.shared-timestamp {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    text-align: right;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+    .shared-nav { padding: 0 20px; }
+    .shared-note { padding: 24px; }
+}

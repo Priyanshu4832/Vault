@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault — Login</title>
+    
+    
+    <link rel="stylesheet" href="css/auth.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!---------------------------------------Auth Container --------------------------------->
+    <div class="auth-container">
+
+        <!---------------------------------- LEFT PANEL ---------------------------------->
+        <div class="auth-left-panel">
+
+            <!---------------Logo------------->
+            <div class="auth-brand">Vault</div>
+
+            <div class="auth-hero">
+                <h1 class="auth-headline">Your thoughts,<br>beautifully kept.</h1>
+                <p class="auth-subline">A personal space for notes, links and files.</p>
+            </div>
+
+            <ul class="auth-features">
+                <li>Store your notes and ideas</li>
+                <li>Attach files and documents</li>
+                <li>Get link previews — no more Rick-Rolls</li>
+            </ul>
+        </div>
+        <!---------------------------------- LEFT PANEL ENDS ---------------------------------->
+
+
+
+
+
+
+
+        <!---------------------------------- RIGHT PANEL----------------------------------->
+        <div class="auth-right-panel">
+
+
+
+
+
+
+            <!----------------- LOGIN FORM WRAPPER ------------------->
+            <div class="auth-form-wrapper" id="login-wrapper">
+
+                <!-------login form header ---------->
+                <div class="auth-form-header">
+                    <h2>Welcome back.</h2>
+                    <p>Don't have an account? <a id="to-register">register</a></p>
+                </div>
+
+                <!----------------- LOGIN FORM ------------------->
+                <form id="login-form" novalidate>
+
+
+                    <!-------------show error for wrong feilds------->
+                    <div class="error-msg" id="login-error"></div>
+
+                    <!----login email feild------->
+                    <div class="form-field">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email" />
+                    </div>
+                    <!----login password feild------->
+                    <div class="form-field">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" />
+                    </div>
+                    <!----login submit button ------->
+                    <button type="button" id="login-btn" class="btn-primary">Sign in</button>
+
+
+                </form>
+                <!----------------- LOGIN FORM ENDS ------------------->
+            </div>
+            <!----------------- LOGIN FORM WRAPPER ENDS ------------------->
+
+
+
+
+
+            
+
+            <!-- ----------------------------------REGISTER FORM ------------------------------------------------>
+            <div class="auth-form-wrapper hidden" id="register-wrapper">
+
+                <!-------register form header ---------->
+                <div class="auth-form-header">
+                    <h2>Create account.</h2>
+                    <p>Already have an account? <a id="to-login">Log in</a></p>
+                </div>
+                <form id="register-form" novalidate>
+
+                    <!-------------show error for wrong feilds------->
+                    <div class="error-msg" id="register-error"></div>
+
+
+                    <!----register name feild------->
+                    <div class="form-field">
+                        <label for="register-name">Name</label>
+                        <input type="text" id="register-name" placeholder="Your name" autocomplete="name" />
+                    </div>
+
+                    <!----Register email feild------->
+                    <div class="form-field">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" placeholder="you@example.com" autocomplete="email" />
+                    </div>
+
+                    <!----register password feild------->
+                    <div class="form-field">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" placeholder="••••••••" autocomplete="new-password" />
+                    </div>
+
+                    <!----register submit button ------->
+                    <button type="button" id="register-btn" class="btn-primary">Create account</button>
+
+                </form>
+                <!-------------------------- REGISTER FORM  ENDS------------------------------->
+            </div>
+
+        </div>
+        <!---------------------------------- RIGHT PANEL ENDS----------------------------------->
+
+
+
+    </div>
+    <!---------------------------------- Auth Container ENDS----------------------------------->
+
+    <script src="js/auth.js"></script>
+</body>
+</html>

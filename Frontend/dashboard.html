@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault — Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+    <!--------------------------------------- NAVBAR ---------------------------------------->
+    <nav class="dash-nav">
+
+        <!------------------ Brand name ------------------>
+        <div class="dash-nav-brand">Vault</div>
+
+        <!------------------ Right side — username + logout ------------------>
+        <div class="dash-nav-right">
+            <span class="dash-nav-username" id="nav-username"></span>
+            <button class="btn-logout" id="btn-logout">Log out</button>
+        </div>
+
+    </nav>
+    <!--------------------------------------- NAVBAR ENDS ------------------------------------->
+
+
+
+
+    <!--------------------------------------- MAIN CONTENT ------------------------------------>
+    <main class="dash-main">
+
+
+        <!------------------ Search bar ------------------>
+        <div class="dash-search-wrapper">
+            <input
+                type="text"
+                class="dash-search"
+                id="search-input"
+                placeholder="Search your notes..."
+            />
+        </div>
+
+
+        <!------------------ Create note trigger — clicking opens create modal ------------------>
+        <div class="dash-create-trigger" id="create-trigger">
+            <span>Take a note...</span>
+        </div>
+
+
+        <!------------------ Notes masonry grid — cards injected by JS ------------------>
+        <div class="dash-grid" id="notes-grid"></div>
+
+
+        <!------------------ Empty state — shown by JS when user has no notes ------------------>
+        <div class="dash-empty hidden" id="empty-state">
+            <p>No notes yet. Take your first one above.</p>
+        </div>
+
+
+    </main>
+    <!--------------------------------------- MAIN CONTENT ENDS -------------------------------->
+
+
+
+
+    <!--------------------------------------- CREATE NOTE MODAL -------------------------------->
+    <div class="modal-overlay hidden" id="create-modal-overlay">
+        <div class="modal dash-modal-create">
+
+
+            <!------------------ Close button ------------------>
+            <button class="modal-close" id="create-modal-close">✕</button>
+
+
+            <!------------------ Note content textarea ------------------>
+            <textarea
+                class="modal-textarea"
+                id="create-content"
+                placeholder="Write your note..."
+                rows="6"
+            ></textarea>
+
+
+            <!------------------ Link preview — shown by JS when URL is detected ------------------>
+            <div class="modal-preview hidden" id="create-preview">
+                <img class="preview-img" id="create-preview-img" src="" alt="" />
+                <div class="preview-text">
+                    <p class="preview-title" id="create-preview-title"></p>
+                    <p class="preview-desc" id="create-preview-desc"></p>
+                </div>
+            </div>
+
+
+            <!------------------ Attached files list — populated by JS ------------------>
+            <div class="modal-files" id="create-files-list"></div>
+
+
+            <!------------------ Modal footer — attach file + save button ------------------>
+            <div class="modal-footer">
+                <label class="btn-attach" for="create-file-input">
+                    + Attach file
+                    <input type="file" id="create-file-input" multiple hidden />
+                </label>
+                <button class="btn-primary btn-save" id="create-save-btn">Save note</button>
+            </div>
+
+
+        </div>
+    </div>
+    <!--------------------------------------- CREATE NOTE MODAL ENDS --------------------------->
+
+
+
+
+    <!--------------------------------------- VIEW / EDIT NOTE MODAL -------------------------->
+    <div class="modal-overlay hidden" id="view-modal-overlay">
+        <div class="modal dash-modal-view">
+
+
+            <!------------------ Close button ------------------>
+            <button class="modal-close" id="view-modal-close">✕</button>
+
+
+            <!------------------ Note content textarea — pre-filled by JS ------------------>
+            <textarea
+                class="modal-textarea"
+                id="view-content"
+                placeholder="Note content..."
+                rows="8"
+            ></textarea>
+
+
+            <!------------------ Attached files list — populated by JS ------------------>
+            <div class="modal-files" id="view-files-list"></div>
+
+
+            <!------------------ Modal footer — add file + delete + share + save ------------------>
+            <div class="modal-footer">
+
+                <label class="btn-attach" for="view-file-input">
+                    + Add file
+                    <input type="file" id="view-file-input" multiple hidden />
+                </label>
+
+                <div class="modal-footer-right">
+                    <button class="btn-danger"     id="view-delete-btn">Delete note</button>
+                    <button class="btn-secondary"  id="view-share-btn" >Share</button>
+                    <button class="btn-primary"    id="view-save-btn"  >Save changes</button>
+                </div>
+
+            </div>
+
+
+            <!------------------ Share URL row — hidden until Share is clicked ------------------>
+            <div class="share-url-row hidden" id="share-url-row">
+                <input type="text" class="share-url-input" id="share-url-input" readonly />
+                <button class="btn-copy" id="copy-share-btn">Copy</button>
+            </div>
+
+
+        </div>
+    </div>
+    <!--------------------------------------- VIEW / EDIT NOTE MODAL ENDS --------------------->
+
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

@@ -10,7 +10,7 @@ import cloudinary from '../../config/cloudinary.js';
 // this is upload to cloudsteam util function
 // returns a promise that resolves with the uploaded file's details (url, public_id, name, type)
 const uploadToCloudinary = async (fileBuffer, originalName, mimeType) => {
-    
+    console.log('uploading to cloudinary:', originalName, mimeType);
     return new Promise((resolve, reject) => {
         
         // convert buffer to readable stream
@@ -21,6 +21,7 @@ const uploadToCloudinary = async (fileBuffer, originalName, mimeType) => {
         const uploadStream = cloudinary.uploader.upload_stream(
             { resource_type: 'auto' },
             (error, result) => {
+                console.log('cloudinary callback:', error, result);
                 if(error) reject(error);
                 else resolve({
                     fileUrl           : result.secure_url,  // https link to the file
@@ -112,7 +113,8 @@ export const createNote = asyncHandler(async (req, res) => {
         throw new Error("Content is required");
     }
 
-    
+    console.log('files received:', req.files);
+    console.log('body received:', req.body);
     // if req.file exists, upload to cloudinary and save to File table
 
     let uploadedFiles = [];
@@ -123,8 +125,12 @@ export const createNote = asyncHandler(async (req, res) => {
             uploadedFiles.push(result);
         }
     }
+    console.log('files received:', req.files);
+    console.log('body received:', req.body);
     
-
+    uploadedFiles.forEach(file =>{
+        console.log(file)
+    })
     
     // create the note in database with userId from req.user.id
     const note = await prisma.note.create({
@@ -374,7 +380,7 @@ export const generateToken = asyncHandler (async (req , res)=>{
 
 //@desc      get the note with the token
 //@routes    GET:  /api/notes/shared/:token
-//access     Private
+//access     public
 export const shareNote = asyncHandler (async(req , res)=>{
 
     const token = req.params.token;
