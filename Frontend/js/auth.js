@@ -1,5 +1,5 @@
 
-
+const API = '/api';
 
 // get the element where i want to toggle that is make hidden or not
 const loginForm = document.getElementById('login-wrapper');
@@ -46,7 +46,7 @@ async function handleLogin() {
         }
      
 
-        const res = await fetch('http://localhost:5000/api/auth/login',
+        const res = await fetch(`${API}/auth/login`,
             {
                 method : 'POST',
                 headers : { 'content-type' : 'application/json'},
@@ -94,7 +94,7 @@ async function handleRegister() {
         }
      
 
-        const res = await fetch('http://localhost:5000/api/auth/register',
+        const res = await fetch(`${API}/auth/register`,
             {
                 method : 'POST',
                 headers : { 'content-type' : 'application/json'},
